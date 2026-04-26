@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a233e" />
+  <meta name="description" content="Namjooning: An Indigo Archive — A mindfulness companion for nature, art, and reading." />
+  <title>Namjooning · An Indigo Archive</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Grain Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ===================== SIDEBAR NAV ===================== -->
+  <nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <div class="logo-mark" aria-hidden="true">南</div>
+      <div class="logo-text">
+        <span class="logo-title">Namjooning</span>
+        <span class="logo-sub">An Indigo Archive</span>
+      </div>
+    </div>
+
+    <ul class="nav-links" role="list">
+      <li><button class="nav-btn active" data-section="dashboard" aria-current="page">
+        <span class="nav-icon">◈</span><span>Still Life</span>
+      </button></li>
+      <li><button class="nav-btn" data-section="nature">
+        <span class="nav-icon">⌘</span><span>Trail Archive</span>
+      </button></li>
+      <li><button class="nav-btn" data-section="art">
+        <span class="nav-icon">◻</span><span>Art Gallery</span>
+      </button></li>
+      <li><button class="nav-btn" data-section="reading">
+        <span class="nav-icon">❧</span><span>Ink & Paper</span>
+      </button></li>
+      <li><button class="nav-btn" data-section="mood">
+        <span class="nav-icon">♩</span><span>Indigo Player</span>
+      </button></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <span class="archive-date" id="archiveDate"></span>
+    </div>
+  </nav>
+
+  <!-- Mobile hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ---- SECTION: Dashboard ---- -->
+    <section class="section active fade-in" id="dashboard" aria-label="Still Life Dashboard">
+      <header class="section-header">
+        <p class="section-eyebrow">Daily Reflection</p>
+        <h1 class="section-title">Still Life</h1>
+      </header>
+
+      <!-- Daily Quote -->
+      <article class="quote-card hanji-card" aria-label="Daily quote">
+        <div class="quote-ornament" aria-hidden="true">"</div>
+        <blockquote class="quote-text" id="dailyQuote">Loading...</blockquote>
+        <cite class="quote-author" id="quoteAuthor">—</cite>
+        <button class="btn-ghost btn-sm new-quote-btn" id="newQuoteBtn" aria-label="Show new quote">
+          ↻ New Quote
+        </button>
+      </article>
+
+      <!-- Stats Overview -->
+      <div class="stats-row">
+        <div class="stat-card hanji-card">
+          <span class="stat-num" id="statHikes">0</span>
+          <span class="stat-label">Wanderings</span>
+        </div>
+        <div class="stat-card hanji-card">
+          <span class="stat-num" id="statArt">0</span>
+          <span class="stat-label">Artworks</span>
+        </div>
+        <div class="stat-card hanji-card">
+          <span class="stat-num" id="statBooks">0</span>
+          <span class="stat-label">Books</span>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="recent-section">
+        <h2 class="subsection-title">Recent Entries</h2>
+        <div class="recent-list" id="recentList">
+          <p class="empty-state">Your archive is empty. Begin by logging a wandering.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- SECTION: Nature / Trail Archive ---- -->
+    <section class="section fade-in" id="nature" aria-label="Trail Archive">
+      <header class="section-header">
+        <p class="section-eyebrow">Forest Bathing</p>
+        <h1 class="section-title">Trail Archive</h1>
+      </header>
+
+      <!-- Add Hike Form -->
+      <div class="form-card hanji-card" id="hikeFormCard">
+        <h2 class="form-card-title">Log a Wandering</h2>
+        <div class="form-grid">
+          <div class="field-group">
+            <label class="field-label" for="hikeTrail">Trail Name</label>
+            <input class="field-input" id="hikeTrail" type="text" placeholder="e.g. Bukhansan Peak" maxlength="80" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="hikeDate">Date</label>
+            <input class="field-input" id="hikeDate" type="date" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="hikePeak">Peak / Elevation</label>
+            <input class="field-input" id="hikePeak" type="text" placeholder="e.g. 836m" maxlength="40" autocomplete="off" />
+          </div>
+          <div class="field-group full-width">
+            <label class="field-label" for="hikeReflection">Reflection</label>
+            <textarea class="field-input field-textarea" id="hikeReflection" placeholder="What did you feel? What did you notice?" rows="3" maxlength="600"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" id="saveHikeBtn">Archive Entry</button>
+          <button class="btn-ghost" id="cancelHikeEditBtn" style="display:none;">Cancel</button>
+        </div>
+        <input type="hidden" id="hikeEditId" value="" />
+      </div>
+
+      <!-- Hike History -->
+      <div class="history-section">
+        <h2 class="subsection-title">All Wanderings</h2>
+        <div class="cards-grid" id="hikeList">
+          <p class="empty-state">No trails logged yet. Begin your archive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- SECTION: Art Gallery ---- -->
+    <section class="section fade-in" id="art" aria-label="Art Gallery Journal">
+      <header class="section-header">
+        <p class="section-eyebrow">Museum Visits</p>
+        <h1 class="section-title">Art Gallery</h1>
+      </header>
+
+      <!-- Add Artwork Form -->
+      <div class="form-card hanji-card" id="artFormCard">
+        <h2 class="form-card-title">Log an Artwork</h2>
+        <div class="form-grid">
+          <div class="field-group">
+            <label class="field-label" for="artTitle">Artwork Title</label>
+            <input class="field-input" id="artTitle" type="text" placeholder="e.g. Starry Night" maxlength="100" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="artArtist">Artist</label>
+            <input class="field-input" id="artArtist" type="text" placeholder="e.g. Vincent van Gogh" maxlength="80" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="artVenue">Museum / Venue</label>
+            <input class="field-input" id="artVenue" type="text" placeholder="e.g. MoMA, New York" maxlength="100" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="artDate">Visit Date</label>
+            <input class="field-input" id="artDate" type="date" />
+          </div>
+          <div class="field-group full-width">
+            <label class="field-label" for="artImpression">Personal Impression</label>
+            <textarea class="field-input field-textarea" id="artImpression" placeholder="How did it make you feel? What stayed with you?" rows="3" maxlength="600"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" id="saveArtBtn">Archive Entry</button>
+          <button class="btn-ghost" id="cancelArtEditBtn" style="display:none;">Cancel</button>
+        </div>
+        <input type="hidden" id="artEditId" value="" />
+      </div>
+
+      <!-- Art History -->
+      <div class="history-section">
+        <h2 class="subsection-title">Gallery Collection</h2>
+        <div class="cards-grid" id="artList">
+          <p class="empty-state">No artworks logged yet. Begin your collection.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- SECTION: Reading Nook ---- -->
+    <section class="section fade-in" id="reading" aria-label="Ink and Paper Reading Log">
+      <header class="section-header">
+        <p class="section-eyebrow">Reading Habit</p>
+        <h1 class="section-title">Ink & Paper</h1>
+      </header>
+
+      <!-- Add Book Form -->
+      <div class="form-card hanji-card" id="bookFormCard">
+        <h2 class="form-card-title">Add a Book</h2>
+        <div class="form-grid">
+          <div class="field-group">
+            <label class="field-label" for="bookTitle">Book Title</label>
+            <input class="field-input" id="bookTitle" type="text" placeholder="e.g. The Vegetarian" maxlength="120" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="bookAuthor">Author</label>
+            <input class="field-input" id="bookAuthor" type="text" placeholder="e.g. Han Kang" maxlength="80" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="bookCurrentPage">Current Page</label>
+            <input class="field-input" id="bookCurrentPage" type="number" placeholder="0" min="0" max="9999" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="bookTotalPages">Total Pages</label>
+            <input class="field-input" id="bookTotalPages" type="number" placeholder="300" min="1" max="9999" />
+          </div>
+          <div class="field-group full-width">
+            <label class="field-label" for="bookQuote">Favourite Quote</label>
+            <textarea class="field-input field-textarea" id="bookQuote" placeholder="A line that will stay with you forever..." rows="3" maxlength="400"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" id="saveBookBtn">Archive Entry</button>
+          <button class="btn-ghost" id="cancelBookEditBtn" style="display:none;">Cancel</button>
+        </div>
+        <input type="hidden" id="bookEditId" value="" />
+      </div>
+
+      <!-- Books List -->
+      <div class="history-section">
+        <h2 class="subsection-title">Reading Archive</h2>
+        <div class="cards-grid books-grid" id="bookList">
+          <p class="empty-state">No books logged yet. Begin your reading archive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- SECTION: Mood Player ---- -->
+    <section class="section fade-in" id="mood" aria-label="Indigo Ambient Player">
+      <header class="section-header">
+        <p class="section-eyebrow">Ambient Atmosphere</p>
+        <h1 class="section-title">Indigo Player</h1>
+      </header>
+
+      <div class="player-card hanji-card">
+        <div class="player-visual" aria-hidden="true">
+          <div class="player-ripple r1"></div>
+          <div class="player-ripple r2"></div>
+          <div class="player-ripple r3"></div>
+          <span class="player-icon" id="playerIcon">♩</span>
+        </div>
+        <div class="player-info">
+          <p class="player-track" id="playerTrack">Rain on Hanji Paper</p>
+          <p class="player-sub">Ambient · Indigo Archive</p>
+        </div>
+
+        <!-- Sound toggle buttons -->
+        <div class="sound-options">
+          <button class="sound-btn active" data-sound="rain">🌧 Rain</button>
+          <button class="sound-btn" data-sound="forest">🌿 Forest</button>
+          <button class="sound-btn" data-sound="waves">🌊 Waves</button>
+          <button class="sound-btn" data-sound="wind">💨 Wind</button>
+        </div>
+
+        <button class="btn-play" id="playBtn" aria-label="Play ambient sound" aria-pressed="false">
+          <span id="playLabel">▶ Play</span>
+        </button>
+
+        <!-- Volume -->
+        <div class="volume-row">
+          <span class="vol-label">Vol</span>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" aria-label="Volume" />
+        </div>
+
+        <!-- Spotify/YouTube embed placeholder -->
+        <div class="embed-section">
+          <p class="embed-label">Or connect an external source</p>
+          <div class="embed-tabs">
+            <button class="embed-tab active" data-embed="spotify">Spotify</button>
+            <button class="embed-tab" data-embed="youtube">YouTube</button>
+          </div>
+          <input class="field-input embed-input" id="embedUrl" type="url" placeholder="Paste a playlist URL…" />
+          <button class="btn-ghost btn-sm" id="loadEmbedBtn">Load ↗</button>
+          <div class="embed-frame-wrap" id="embedFrameWrap" style="display:none;">
+            <iframe id="embedFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="External music embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Confirm deletion" style="display:none;">
+    <div class="modal-box hanji-card">
+      <h3 class="modal-title">Remove Entry?</h3>
+      <p class="modal-body">This entry will be permanently removed from your archive. This cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="modalCancelBtn">Keep It</button>
+        <button class="btn-danger" id="modalConfirmBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
